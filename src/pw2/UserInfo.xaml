@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pw2.UserInfo">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="25"
+            BackgroundColor="#FFD6D6D6">
+            
+            <!-- title-->
+            <StackLayout BackgroundColor="#FF628AB8" Padding="15">
+            <Label
+                Text="USER INFORMATION"
+                HorizontalOptions="Center"
+                TextColor="black"
+                FontAttributes="Bold"
+                FontSize="24"/>
+            </StackLayout>
+
+            <!-- exit-->
+            <Button 
+                Text="EXIT" 
+                TextColor="black" 
+                BackgroundColor="#FFD6D6D6"
+                FontSize="14"
+                HorizontalOptions="End"
+                x:Name="exit"
+                Clicked="clicked_exit"/>
+
+            <!-- show -->
+            <Label x:Name="show" 
+            Text="The information of the current user is"
+            FontAttributes="Bold"
+            FontSize="20"
+            TextColor="Black"/>
+
+            <!-- name -->
+            <Label x:Name="showname" 
+            Text="Name"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- username -->
+            <Label x:Name="showusername" 
+            Text="Username"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- email -->
+            <Label x:Name="showemail" 
+            Text="Email"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- password -->
+            <Label x:Name="showpw" 
+            Text="Password"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- num operations -->
+            <Label x:Name="numop" 
+            Text="Number of Operations"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- list of operations -->
+            <Label
+            Text = "List of Operations"
+            FontAttributes="Bold"
+            FontSize="16"
+            TextColor="Black"/> 
+                
+            <!--input-->
+            <Label x:Name="showinput" 
+            Text="input"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!--conversion-->
+            <Label x:Name="showconversion" 
+            Text="conversion"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!--output-->
+            <Label x:Name="showoutput" 
+            Text="output"
+            BackgroundColor="white"
+            TextColor="Black"/>
+
+            <!-- register -->
+            <Button 
+            Text="Log Out" 
+            BackgroundColor="Blue"
+            TextColor="white"
+            FontSize="14"
+            HorizontalOptions="Center"
+            x:Name="logoutclicked"
+            Clicked="clicked_logout"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

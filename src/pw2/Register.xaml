@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="pw2.Register">
+
+    <ScrollView>
+   <!-- title-->
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="25"
+            BackgroundColor="#FFD6D6D6">
+
+            <StackLayout BackgroundColor="#FF628AB8" Padding="15">
+            <Label
+                Text="REGISTER"
+                HorizontalOptions="Center"
+                TextColor="black"
+                FontSize="24"
+                FontAttributes="Bold"/>
+            </StackLayout>
+              
+            <!-- exit-->
+            <Button 
+                Text="EXIT" 
+                TextColor="black" 
+                BackgroundColor="#FFD6D6D6"
+                FontSize="14"
+                HorizontalOptions="End"
+                x:Name="exit"
+                Clicked="clicked_exit"/> 
+            
+
+            <!-- name box -->
+            <Label Text="Name"/>
+            <Entry x:Name="entername"
+                   Placeholder="enter your name"
+                   BackgroundColor="white"
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"/>
+
+            <!-- username box -->
+            <Label Text="Username"/>
+            <Entry x:Name="enterusername"
+                   Placeholder="enter your username"
+                   BackgroundColor="white"
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"/>
+
+            <!-- email box -->
+            <Label Text="Email"/>
+            <Entry x:Name="enteremail"
+                   Placeholder="enter your email"
+                   BackgroundColor="white"
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"/>
+
+            <!-- password box -->
+            <Label Text="Password"/>
+            <Entry x:Name="enterpassword"
+                   Placeholder="enter password"
+                   BackgroundColor="white"
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"/>
+
+            <!-- confirm password box -->
+            <Label Text="Confirm Password"/>
+            <Entry x:Name="enterconfirmpassword"
+                   Placeholder="confirm password"
+                   BackgroundColor="white"
+                   TextColor="Black" 
+                   PlaceholderColor="Gray"/>
+
+            <HorizontalStackLayout>
+            <!-- check policies -->
+            <CheckBox x:Name="acceptpolicy" />
+            <Label Text="I accept the data policy"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            
+            <!-- register button -->
+            <Button Text="Register"
+                    Clicked="OnRegisterClicked"
+                    BackgroundColor="blue"
+                    TextColor="white" />
+                    
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
