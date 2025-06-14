@@ -51,32 +51,16 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                     {
                         foreach (string lineFile in File.ReadAllLines(operationsPath))
                         {
-                            //string[] parts = line.Split(';');
+                            string[] parts = lineFile.Split(';');
 
-                            showinput.Text = "Input: " + part[1];
-                            showconversion.Text = "Conversion Type: " + part[2];
-                            showoutput.Text = "Output: " + part[3];
+                            showinput.Text = "Input: " + parts[2];
+                            showconversion.Text = "Conversion Type: " + parts[1];
+                            showoutput.Text = "Output: " + parts[2];
                         }
                     }
                 }
             }
         }
-
-/*
-        if (File.Exists(operationsPath))
-        {
-            foreach (string line in File.ReadAllLines(operationsPath))
-            {
-                string[] part = line.Split(';');
-                if (part[1] == actualuser) //read the info of the actual user and display it 
-                {
-                    showinput.Text = "Input: " + part[1];
-                    showconversion.Text = "Conversion Type: " + part[2];
-                    showoutput.Text = "Output: " + part[3];
-                }
-            }
-        }
-*/
     }
 
     //when the user click 'log out' the user is eliminated and get taken to the main page again
@@ -108,6 +92,12 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                 await Navigation.PushAsync(new MainPage());
             }
         }
+    }
+
+    //when the conversor is clicked, it takes the user back to the calculator
+    private async void clicked_con(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Conversor());
     }
 
     //when the exit is clicked, it closes the window

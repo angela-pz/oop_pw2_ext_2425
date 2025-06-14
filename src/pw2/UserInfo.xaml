@@ -90,8 +90,18 @@
             Text="output"
             BackgroundColor="white"
             TextColor="Black"/>
+        
+            <!-- conversor -->
+            <Button 
+            Text="Conversor" 
+            TextColor="blue" 
+            BackgroundColor="white"
+            FontSize="14"
+            HorizontalOptions="Center"
+            x:Name="conclick"
+            Clicked="clicked_con"/>
 
-            <!-- register -->
+            <!-- log out -->
             <Button 
             Text="Log Out" 
             BackgroundColor="Blue"
