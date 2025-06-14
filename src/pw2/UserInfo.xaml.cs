@@ -85,7 +85,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
 
         if (File.Exists(path))
         {
-
+            actualuser = "";
         }
         await DisplayAlert("User Eliminated !", "click 'ok' to get to the main page", "OK");
         await Navigation.PushAsync(new MainPage());

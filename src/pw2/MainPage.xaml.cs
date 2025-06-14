@@ -23,34 +23,77 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	//when the log in button is clicked, it takes the user to the calculator page (if the user is already registered)
-	private async void login_clicked(object sender, EventArgs e)
+	private bool valid_credentials(string username, string password)
 	{
 		string path = "files/user.csv";
-		if (string.IsNullOrEmpty(enterusername.Text) || string.IsNullOrEmpty(enterpassword.Text))
+
+		if (!File.Exists(path))
+		{
+			return false;
+		}
+		foreach (string line in File.ReadAllLines(path))
+		{
+			string[] part = line.Split(';');
+			if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private async void login_clicked(object sender, EventArgs e)
+	{
+		string username = enterusername.Text;
+		string password = enterpassword.Text;
+
+		if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
 		{
 			await DisplayAlert("Error", "enter an username and a password", "OK");
+			return;
+		}
+
+		bool valid = valid_credentials(username, password);
+
+		if (valid)
+		{
+			await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={enterusername.Text}");
 		}
 		else
 		{
-			if (File.Exists(path))
-			{
-				foreach (string line in File.ReadAllLines(path))
-				{
-					string[] part = line.Split(';');
-					if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
-					{
-						await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={enterusername.Text}");
-					}
-				}
-			}
-			else
-			{
-				await DisplayAlert("ERROR", "Not registered or it does not match", "OK");
-			}
+			await DisplayAlert("Error", "enter an username and a password", "OK");			
 		}
 	}
 
+/*	
+			//when the log in button is clicked, it takes the user to the calculator page (if the user is already registered)
+			private async void login_clicked(object sender, EventArgs e)
+			{
+				string path = "files/user.csv";
+				if (string.IsNullOrEmpty(enterusername.Text) || string.IsNullOrEmpty(enterpassword.Text))
+				{
+					await DisplayAlert("Error", "enter an username and a password", "OK");
+				}
+				else
+				{
+					if (File.Exists(path))
+					{
+						foreach (string line in File.ReadAllLines(path))
+						{
+							string[] part = line.Split(';');
+							if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
+							{
+								await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={enterusername.Text}");
+							}
+						}
+					}
+					else
+					{
+						await DisplayAlert("ERROR", "Not registered or it does not match", "OK");
+					}
+				}
+			}
+		*/
 	//when the register text is clicked, it takes the user to the register page
 	private async void clicked_register(object sender, EventArgs e)
 	{
