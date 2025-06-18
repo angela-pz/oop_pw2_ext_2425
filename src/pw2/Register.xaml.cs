@@ -19,7 +19,8 @@ public partial class Register : ContentPage
         bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
         if (answer)
         {
-            System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            //System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            Environment.Exit(0);
         }
     }
 
@@ -108,7 +109,7 @@ public partial class Register : ContentPage
         UserStore user = new UserStore(entername.Text, enterusername.Text, enteremail.Text, enterpassword.Text, enterconfirmpassword.Text);
         user.StoreUser(path);
         await DisplayAlert("New user created :)", "click 'ok' to get to the main page", "OK");
-        await Navigation.PushAsync(new MainPage());
+        await Shell.Current.GoToAsync(nameof(MainPage));
 
     }
 

@@ -19,7 +19,8 @@ public partial class MainPage : ContentPage
 		bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
 		if (answer)
 		{
-			System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+			//System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+			Environment.Exit(0);
 		}
 	}
 
@@ -69,12 +70,12 @@ public partial class MainPage : ContentPage
 	//when the register text is clicked, it takes the user to the register page
 	private async void clicked_register(object sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new Register());
+		await Shell.Current.GoToAsync(nameof(Register));
 	}
 
 	//when the forgot password text is clicked, it taked the user to the forgot password page
 	private async void clicked_fp(object sender, EventArgs e)
 	{
-		await Navigation.PushAsync(new ForgotPassword());
+		await Shell.Current.GoToAsync(nameof(ForgotPassword));
 	}
 }

@@ -17,7 +17,8 @@ public partial class ForgotPassword : ContentPage
         bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
         if (answer)
         {
-            System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            //System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            Environment.Exit(0);
         }
     }
 
@@ -93,6 +94,6 @@ public partial class ForgotPassword : ContentPage
 
         //confirmed change and automatically takes it to the main page
         await DisplayAlert("Password changed :)", "click 'ok' to get to the main page", "Ok");
-        await Navigation.PushAsync(new MainPage());
+        await Shell.Current.GoToAsync(nameof(MainPage));
     }
 }

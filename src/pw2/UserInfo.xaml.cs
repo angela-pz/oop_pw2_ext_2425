@@ -53,7 +53,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                         {
                             string[] parts = lineFile.Split(';');
 
-                            showinput.Text = "Input: " + parts[2];
+                            showinput.Text = "Input: " + parts[0];
                             showconversion.Text = "Conversion Type: " + parts[1];
                             showoutput.Text = "Output: " + parts[2];
                         }
@@ -89,7 +89,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
             {
                 File.WriteAllLines(path, lines);
                 await DisplayAlert("User Eliminated !", "click 'ok' to get to the main page", "OK");
-                await Navigation.PushAsync(new MainPage());
+                await Shell.Current.GoToAsync(nameof(MainPage));
             }
         }
     }
@@ -97,7 +97,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
     //when the conversor is clicked, it takes the user back to the calculator
     private async void clicked_con(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Conversor());
+        await Shell.Current.GoToAsync(nameof(Conversor));
     }
 
     //when the exit is clicked, it closes the window
@@ -106,7 +106,8 @@ public partial class UserInfo : ContentPage, IQueryAttributable
         bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
         if (answer)
         {
-            System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            //System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
+            Environment.Exit(0);
         }
     }
 
