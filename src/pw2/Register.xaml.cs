@@ -109,7 +109,7 @@ public partial class Register : ContentPage
         UserStore user = new UserStore(entername.Text, enterusername.Text, enteremail.Text, enterpassword.Text, enterconfirmpassword.Text);
         user.StoreUser(path);
         await DisplayAlert("New user created :)", "click 'ok' to get to the main page", "OK");
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        await Shell.Current.GoToAsync("///MainPage");
 
     }
 

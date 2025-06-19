@@ -8,3 +8,7 @@
 101000;DecimalToBinay;101000
 10110;DecimalToBinay;10110
 11;;11
+10100;DecimalToBinay;10100
+20;DecimalToBinary;10100
+31;DecimalToBinary;11111
+A;;10

@@ -7,9 +7,9 @@ public partial class Conversor : ContentPage, IQueryAttributable
 {
     private List<Conversion> conversions;
     private string actualuser;
-    private string outputcalc;
+    private string inputvalue;
     private string conversiontype;
-
+    private string outputcalc;
 
     public Conversor()
     {
@@ -69,10 +69,11 @@ public partial class Conversor : ContentPage, IQueryAttributable
     }
     
 
-    private void ListInfo(string conversionType, string output)
+    private void ListInfo(string inputvalue, string conversionType, string outputcalc)
     {
         string operationsPath = "files/operations.csv";
-        string operationLineFile = $"{enterinput.Text};{conversionType};{output}";
+        string operationLineFile = $"{inputvalue};{conversionType};{outputcalc}";
+
         File.AppendAllText(operationsPath, operationLineFile + Environment.NewLine);
     }
 
@@ -97,32 +98,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
     //when the user click 'log out' the user is eliminated and get taken to the main page again
     private async void clicked_logout(object sender, EventArgs e)
     {
-        string path = "files/user.csv";
-
-        if (File.Exists(path))
-        {
-            string[] lines = File.ReadAllLines(path);
-            bool found = false;
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] parts = lines[i].Split(';');
-
-                if (parts[1] == actualuser)
-                {
-                    parts[1] = ""; //modify the user to empty
-                    lines[i] = string.Join(";", parts);
-
-                    found = true;
-                }
-            }
-            if (found)
-            {
-                File.WriteAllLines(path, lines);
-                await DisplayAlert("User Eliminated !", "click 'ok' to get to the main page", "OK");
-                await Shell.Current.GoToAsync(nameof(MainPage));
-            }
-        }
+        await Shell.Current.GoToAsync("///MainPage");
     }
 
     //shows the digits pressed
@@ -166,14 +142,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only decimal numbers are inputed
             if (int.TryParse(enterinput.Text, out int decimalval))
             {
+                inputvalue = enterinput.Text;
                 DecimalToBinary converter = new DecimalToBinary("Binary", "Decimal to Binary");
                 string numbinary = converter.Change(enterinput.Text);
                 enterinput.Text = numbinary;
 
-                outputcalc = numbinary;
-                conversiontype = "DecimalToBinay";
+                conversiontype = "DecimalToBinary";
+                outputcalc = enterinput.Text;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -197,13 +174,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only decimal numbers are inputed
             if (int.TryParse(enterinput.Text, out int decimalval))
             {
+                inputvalue = enterinput.Text;
                 DecimalToTwoComplement converter = new DecimalToTwoComplement("TwoComplement", "Decimal to Binary (TwoComplement)");
                 string numtwocom = converter.Change(enterinput.Text);
                 enterinput.Text = numtwocom;
 
+                conversiontype = "DecimalToTwoComplement";
                 outputcalc = numtwocom;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -227,13 +206,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only decimal numbers are inputed
             if (int.TryParse(enterinput.Text, out int decimalval))
             {
+                inputvalue = enterinput.Text;
                 DecimalToOctal converter = new DecimalToOctal("Octal", "Decimal to Octal");
                 string octalnum = converter.Change(enterinput.Text);
                 enterinput.Text = octalnum;
 
+                conversiontype = "DecimalToOctal";
                 outputcalc = octalnum;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -257,13 +238,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only decimal numbers are inputed
             if (int.TryParse(enterinput.Text, out int decimalval))
             {
+                inputvalue = enterinput.Text;
                 DecimalToHexadecimal converter = new DecimalToHexadecimal("Hexadecimal", "Decimal to Hexadecimal");
                 string hexnum = converter.Change(enterinput.Text);
                 enterinput.Text = hexnum;
 
+                conversiontype = "DecimalToHexadecimal";
                 outputcalc = hexnum;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -289,13 +272,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only binary numbers are inputed
             if (bin.All(c => c == '0' || c == '1'))
             {
+                inputvalue = enterinput.Text;
                 BinaryToDecimal converter = new BinaryToDecimal("Decimal", "Binary to Decimal");
                 string decnum = converter.Change(enterinput.Text);
                 enterinput.Text = decnum;
 
+                conversiontype = "BinaryToDecimal";
                 outputcalc = decnum;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -321,13 +306,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only twos compliment (binary) numbers are inputed
             if (bin.All(c => c == '0' || c == '1'))
             {
+                inputvalue = enterinput.Text;
                 TwoComplementToDecimal converter = new TwoComplementToDecimal("Decimal", "Binary (TwoComplement) to Decimal");
                 string decnum = converter.Change(enterinput.Text);
                 enterinput.Text = decnum;
-
+                
+                conversiontype = "TwoComplementToDecimal";
                 outputcalc = decnum;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -351,13 +338,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
             //validation to check that only octal numbers are inputed
             if (int.TryParse(enterinput.Text, out int decimalval))
             {
+                inputvalue = enterinput.Text;
                 OctalToDecimal converter = new OctalToDecimal("Decimal", "Octal to Decimal");
                 string decnum = converter.Change(enterinput.Text);
                 enterinput.Text = decnum;
 
+                conversiontype = "OctalToDecimal";
                 outputcalc = decnum;
                 SumOperations();
-                ListInfo(conversiontype, outputcalc);
+                ListInfo(inputvalue, conversiontype, outputcalc);
             }
             else
             {
@@ -378,13 +367,15 @@ public partial class Conversor : ContentPage, IQueryAttributable
         //validation to check if there has been data inputed to convert
         if (!string.IsNullOrEmpty(enterinput.Text))
         {
+            inputvalue = enterinput.Text;
             HexadecimalToDecimal converter = new HexadecimalToDecimal("Decimal", "Hexadecimal to Decimal");
             string decnum = converter.Change(enterinput.Text);
             enterinput.Text = decnum;
 
+            conversiontype = "Hexadecimal";
             outputcalc = decnum;
             SumOperations();
-            ListInfo(conversiontype, outputcalc);
+            ListInfo(inputvalue, conversiontype, outputcalc);
         }
         else
         {

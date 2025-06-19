@@ -66,32 +66,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
     //when the user click 'log out' the user is eliminated and get taken to the main page again
     private async void clicked_logout(object sender, EventArgs e)
     {
-        string path = "files/user.csv";
-
-        if (File.Exists(path))
-        {
-            string[] lines = File.ReadAllLines(path);
-            bool found = false;
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string[] parts = lines[i].Split(';');
-
-                if (parts[1] == actualuser)
-                {
-                    parts[1] = ""; //modify the user to empty
-                    lines[i] = string.Join(";", parts);
-
-                    found = true;
-                }
-            }
-            if (found)
-            {
-                File.WriteAllLines(path, lines);
-                await DisplayAlert("User Eliminated !", "click 'ok' to get to the main page", "OK");
-                await Shell.Current.GoToAsync(nameof(MainPage));
-            }
-        }
+        await Shell.Current.GoToAsync("///MainPage");
     }
 
     //when the conversor is clicked, it takes the user back to the calculator
@@ -110,5 +85,4 @@ public partial class UserInfo : ContentPage, IQueryAttributable
             Environment.Exit(0);
         }
     }
-
 }
