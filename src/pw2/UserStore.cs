@@ -40,7 +40,7 @@ namespace pw2
         {
             using (StreamWriter writer = new StreamWriter(operationsPath, append: true))
             {
-                writer.WriteLine($"{this.inputvalue};{this.conversiontype};{this.outputcalc}");
+                writer.WriteLine($"{this.username};{this.inputvalue};{this.conversiontype};{this.outputcalc}");
             }
         }
     }

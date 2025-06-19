@@ -72,7 +72,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
     private void ListInfo(string inputvalue, string conversionType, string outputcalc)
     {
         string operationsPath = "files/operations.csv";
-        string operationLineFile = $"{inputvalue};{conversionType};{outputcalc}";
+        string operationLineFile = $"{actualuser};{inputvalue};{conversionType};{outputcalc}";
 
         File.AppendAllText(operationsPath, operationLineFile + Environment.NewLine);
     }
@@ -372,7 +372,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             string decnum = converter.Change(enterinput.Text);
             enterinput.Text = decnum;
 
-            conversiontype = "Hexadecimal";
+            conversiontype = "HexadecimalToDecimal";
             outputcalc = decnum;
             SumOperations();
             ListInfo(inputvalue, conversiontype, outputcalc);

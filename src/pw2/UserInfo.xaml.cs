@@ -52,10 +52,12 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                         foreach (string lineFile in File.ReadAllLines(operationsPath))
                         {
                             string[] parts = lineFile.Split(';');
-
-                            showinput.Text = "Input: " + parts[0];
-                            showconversion.Text = "Conversion Type: " + parts[1];
-                            showoutput.Text = "Output: " + parts[2];
+                            if (parts[0] == actualuser)
+                            {
+                                showinput.Text = "Input: " + parts[1];
+                                showconversion.Text = "Conversion Type: " + parts[2];
+                                showoutput.Text = "Output: " + parts[3];
+                            }
                         }
                     }
                 }
