@@ -64,6 +64,27 @@ public partial class Register : ContentPage
         }
 
         //check that the user name is not already registered
+        try
+        {
+            if (File.Exists(path))
+            {
+                foreach (string line in File.ReadAllLines(path))
+                {
+                    string[] part = line.Split(';');
+                    if (part[1] == enterusername.Text)
+                    {
+                        await DisplayAlert("Error", "username already exists", "OK");
+                        return;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            
+        }
+
+        /*
         if (File.Exists(path))
         {
             foreach (string line in File.ReadAllLines(path))
@@ -76,6 +97,7 @@ public partial class Register : ContentPage
                 }
             }
         }
+        */
 
         //the email must contain @
         if (!email.Contains("@"))

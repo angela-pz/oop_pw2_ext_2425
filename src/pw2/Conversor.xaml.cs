@@ -36,36 +36,70 @@ public partial class Conversor : ContentPage, IQueryAttributable
             this.actualuser = query["username"].ToString();
         }
     }
-    
+
     //increments the number of operations 
     private void SumOperations()
     {
         string path = "files/user.csv";
 
-        if (File.Exists(path))
+        try
         {
-            string[] lines = File.ReadAllLines(path);
-            bool found = false;
-
-            for (int i = 0; i < lines.Length; i++)
+            if (File.Exists(path))
             {
-                string[] parts = lines[i].Split(';');
-                if (parts[1] == this.actualuser)
+                string[] lines = File.ReadAllLines(path);
+                bool found = false;
+
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    //sums the number of operations
-                    int numoperations = Convert.ToInt32(parts[5]);
-                    numoperations++;
-                    parts[5] = numoperations.ToString(); //modifies the value in the file
-                    lines[i] = string.Join(";", parts);
-                    found = true;
+                    string[] parts = lines[i].Split(';');
+                    if (parts[1] == this.actualuser)
+                    {
+                        //sums the number of operations
+                        int numoperations = Convert.ToInt32(parts[5]);
+                        numoperations++;
+                        parts[5] = numoperations.ToString(); //modifies the value in the file
+                        lines[i] = string.Join(";", parts);
+                        found = true;
+                    }
+                }
+
+                if (found)
+                {
+                    File.WriteAllLines(path, lines); //writes it in the file
                 }
             }
-
-            if (found)
-            {
-                File.WriteAllLines(path, lines); //writes it in the file
-            }
         }
+        catch (Exception ex)
+        {
+
+        }
+
+        /*
+            if (File.Exists(path))
+            {
+                string[] lines = File.ReadAllLines(path);
+                bool found = false;
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] parts = lines[i].Split(';');
+                    if (parts[1] == this.actualuser)
+                    {
+                        //sums the number of operations
+                        int numoperations = Convert.ToInt32(parts[5]);
+                        numoperations++;
+                        parts[5] = numoperations.ToString(); //modifies the value in the file
+                        lines[i] = string.Join(";", parts);
+                        found = true;
+                    }
+                }
+
+                if (found)
+                {
+                    File.WriteAllLines(path, lines); //writes it in the file
+                }
+                */
+        
     }
     
 
@@ -74,7 +108,14 @@ public partial class Conversor : ContentPage, IQueryAttributable
         string operationsPath = "files/operations.csv";
         string operationLineFile = $"{actualuser};{inputvalue};{conversionType};{outputcalc}";
 
-        File.AppendAllText(operationsPath, operationLineFile + Environment.NewLine);
+        try
+        {
+            File.AppendAllText(operationsPath, operationLineFile + Environment.NewLine);
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
         

@@ -34,6 +34,51 @@ public partial class UserInfo : ContentPage, IQueryAttributable
         string path = "files/user.csv";
         string operationsPath = "files/operations.csv";
 
+        try
+        {
+            if (File.Exists(path))
+            {
+                foreach (string line in File.ReadAllLines(path))
+                {
+                    string[] part = line.Split(';');
+                    if (part[1] == actualuser) //read the info of the actual user and display it 
+                    {
+                        showname.Text = "Name: " + part[0];
+                        showusername.Text = "Username: " + part[1];
+                        showemail.Text = "Email: " + part[2];
+                        showpw.Text = "Password: " + part[3];
+                        numop.Text = "Number of operations: " + part[5];
+
+                        try
+                        {
+                            if (File.Exists(operationsPath))
+                            {
+                                foreach (string lineFile in File.ReadAllLines(operationsPath))
+                                {
+                                    string[] parts = lineFile.Split(';');
+                                    if (parts[0] == actualuser)
+                                    {
+                                        showinput.Text = "Input: " + parts[1];
+                                        showconversion.Text = "Conversion Type: " + parts[2];
+                                        showoutput.Text = "Output: " + parts[3];
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            
+                        }
+                    }
+                }
+            }
+        }
+        catch
+        {
+
+        }
+
+        /*
         if (File.Exists(path))
         {
             foreach (string line in File.ReadAllLines(path))
@@ -63,6 +108,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                 }
             }
         }
+        */
     }
 
     //when the user click 'log out' the user is eliminated and get taken to the main page again

@@ -24,10 +24,33 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	private bool valid_credentials(string username, string password)
+	private bool Validcredentials(string username, string password)
 	{
 		string path = "files/user.csv";
 
+		try
+		{
+			if (!File.Exists(path))
+			{
+				return false;
+			}
+			foreach (string line in File.ReadAllLines(path))
+			{
+				string[] part = line.Split(';');
+				if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
+				{
+					return true;
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			return false;
+		}
+		return false;
+	}
+
+		/*
 		if (!File.Exists(path))
 		{
 			return false;
@@ -41,7 +64,8 @@ public partial class MainPage : ContentPage
 			}
 		}
 		return false;
-	}
+		*/
+	
 
 	private async void login_clicked(object sender, EventArgs e)
 	{
@@ -54,7 +78,7 @@ public partial class MainPage : ContentPage
 			return;
 		}
 
-		bool valid = valid_credentials(username, password);
+		bool valid = Validcredentials(username, password);
 
 		if (valid)
 		{
