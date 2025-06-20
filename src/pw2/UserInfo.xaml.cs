@@ -90,7 +90,6 @@ public partial class UserInfo : ContentPage, IQueryAttributable
     //when the conversor is clicked, it takes the user back to the calculator
     private async void clicked_con(object sender, EventArgs e)
     {
-        //await Shell.Current.GoToAsync(nameof(Conversor));
         await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={this.actualuser}");
     }
 
@@ -100,7 +99,6 @@ public partial class UserInfo : ContentPage, IQueryAttributable
         bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
         if (answer)
         {
-            //System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
             Environment.Exit(0);
         }
     }

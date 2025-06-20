@@ -17,7 +17,6 @@ public partial class ForgotPassword : ContentPage
         bool answer = await DisplayAlert("Confirm Exit", "click 'yes' to exit", "Yes", "No");
         if (answer)
         {
-            //System.Diagnostics.Process.GetCurrentProcess().CloseMainWindow();
             Environment.Exit(0);
         }
     }
