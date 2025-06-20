@@ -51,31 +51,39 @@ public partial class ForgotPassword : ContentPage
             return;
         }
 
-        if (File.Exists(path))
+        try
         {
-            string[] lines = File.ReadAllLines(path);
-            bool found = false;
-
-            for (int i = 0; i < lines.Length; i++)
+            if (File.Exists(path))
             {
-                string[] parts = lines[i].Split(';');
-                if (parts[1] == enterusername.Text)
+                string[] lines = File.ReadAllLines(path);
+                bool found = false;
+
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    parts[3] = enterpassword.Text; //modify the password to the new one
-                    lines[i] = string.Join(";", parts);
-                    found = true;
+                    string[] parts = lines[i].Split(';');
+                    if (parts[1] == enterusername.Text)
+                    {
+                        parts[3] = enterpassword.Text; //modify the password to the new one
+                        lines[i] = string.Join(";", parts);
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    await DisplayAlert("Error", "This username is not registerd", "OK");
+                    return;
+                }
+                else
+                {
+                    File.WriteAllLines(path, lines); //write the new password in the file
                 }
             }
-
-            if (!found)
-            {
-                await DisplayAlert("Error", "This username is not registerd", "OK");
-                return;
-            }
-            else
-            {
-                File.WriteAllLines(path, lines); //write the new password in the file
-            }
+        }
+        catch
+        {
+            await DisplayAlert("Error", "There is an error regarding the file", "OK");
+            return;
         }
 
         //validation for the password
@@ -94,6 +102,6 @@ public partial class ForgotPassword : ContentPage
 
         //confirmed change and automatically takes it to the main page
         await DisplayAlert("Password changed :)", "click 'ok' to get to the main page", "Ok");
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        await Shell.Current.GoToAsync("///MainPage");
     }
 }

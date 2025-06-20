@@ -24,69 +24,37 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	private bool Validcredentials(string username, string password)
-	{
-		string path = "files/user.csv";
-
-		try
-		{
-			if (!File.Exists(path))
-			{
-				return false;
-			}
-			foreach (string line in File.ReadAllLines(path))
-			{
-				string[] part = line.Split(';');
-				if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
-				{
-					return true;
-				}
-			}
-		}
-		catch (Exception ex)
-		{
-			return false;
-		}
-		return false;
-	}
-
-		/*
-		if (!File.Exists(path))
-		{
-			return false;
-		}
-		foreach (string line in File.ReadAllLines(path))
-		{
-			string[] part = line.Split(';');
-			if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
-			{
-				return true;
-			}
-		}
-		return false;
-		*/
-	
-
 	private async void login_clicked(object sender, EventArgs e)
 	{
+		string path = "files/user.csv";
 		string username = enterusername.Text;
 		string password = enterpassword.Text;
+		bool valid = false;
 
 		if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
 		{
 			await DisplayAlert("Error", "enter an username and a password", "OK");
 			return;
 		}
-
-		bool valid = Validcredentials(username, password);
-
-		if (valid)
+		try
 		{
-			await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={enterusername.Text}");
+			if (!File.Exists(path))
+			{
+				await DisplayAlert("Error", "File does not exist", "OK");
+				return;
+			}
+			foreach (string line in File.ReadAllLines(path))
+			{
+				string[] part = line.Split(';');
+				if (part[1] == enterusername.Text && part[3] == enterpassword.Text)
+				{
+					await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={enterusername.Text}");
+				}
+			}
 		}
-		else
+		catch
 		{
-			await DisplayAlert("Error", "enter an username and a password", "OK");			
+			await DisplayAlert("Error", "Error related to the file", "OK");
 		}
 	}
 

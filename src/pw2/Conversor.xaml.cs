@@ -38,7 +38,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
     }
 
     //increments the number of operations 
-    private void SumOperations()
+    private async void SumOperations()
     {
         string path = "files/user.csv";
 
@@ -71,39 +71,13 @@ public partial class Conversor : ContentPage, IQueryAttributable
         }
         catch (Exception ex)
         {
-
+            await DisplayAlert("Error", "There is an error regarding the file", "OK");
+            return;
         }
-
-        /*
-            if (File.Exists(path))
-            {
-                string[] lines = File.ReadAllLines(path);
-                bool found = false;
-
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    string[] parts = lines[i].Split(';');
-                    if (parts[1] == this.actualuser)
-                    {
-                        //sums the number of operations
-                        int numoperations = Convert.ToInt32(parts[5]);
-                        numoperations++;
-                        parts[5] = numoperations.ToString(); //modifies the value in the file
-                        lines[i] = string.Join(";", parts);
-                        found = true;
-                    }
-                }
-
-                if (found)
-                {
-                    File.WriteAllLines(path, lines); //writes it in the file
-                }
-                */
-        
     }
     
 
-    private void ListInfo(string inputvalue, string conversionType, string outputcalc)
+    private async void ListInfo(string inputvalue, string conversionType, string outputcalc)
     {
         string operationsPath = "files/operations.csv";
         string operationLineFile = $"{actualuser};{inputvalue};{conversionType};{outputcalc}";
@@ -114,7 +88,8 @@ public partial class Conversor : ContentPage, IQueryAttributable
         }
         catch (Exception ex)
         {
-
+            await DisplayAlert("Error", "There is an error regarding the file", "OK");
+            return;
         }
     }
 
@@ -196,6 +171,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -228,6 +204,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -260,6 +237,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -292,6 +270,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -326,6 +305,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -360,6 +340,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }
@@ -392,6 +373,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
             else
             {
                 await DisplayAlert("Error", "Enter the correct data", "ok");
+                enterinput.Text = string.Empty;
                 return;
             }
         }

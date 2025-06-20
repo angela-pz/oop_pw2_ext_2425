@@ -5,15 +5,15 @@ namespace pw2;
 
 public partial class UserInfo : ContentPage, IQueryAttributable
 {
-    public string entername { get; set; }
-    public string enterusername{ get; set; }
-    public string enteremail { get; set;}
-    public string enterpassword { get; set; }
-    public string enterconfirmpassword { get; set; }
-    public int operations { get; set; }
-    public string inputcalc { get; set;}
-    public string conversiontype { get; set;}
-    public string outputcalc { get; set;}
+    private string entername { get; set; }
+    private string enterusername{ get; set; }
+    private string enteremail { get; set;}
+    private string enterpassword { get; set; }
+    private string enterconfirmpassword { get; set; }
+    private int operations { get; set; }
+    private string inputcalc { get; set;}
+    private string conversiontype { get; set;}
+    private string outputcalc { get; set;}
 
     private string actualuser;
     public UserInfo()
@@ -28,7 +28,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
             OnAppearing();
         }
     }
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
         string path = "files/user.csv";
@@ -67,7 +67,8 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                         }
                         catch (Exception ex)
                         {
-                            
+                            await DisplayAlert("Error", "This username is not registerd", "OK");
+                            return;
                         }
                     }
                 }
@@ -75,40 +76,9 @@ public partial class UserInfo : ContentPage, IQueryAttributable
         }
         catch
         {
-
+            await DisplayAlert("Error", "This username is not registerd", "OK");
+            return;
         }
-
-        /*
-        if (File.Exists(path))
-        {
-            foreach (string line in File.ReadAllLines(path))
-            {
-                string[] part = line.Split(';');
-                if (part[1] == actualuser) //read the info of the actual user and display it 
-                {
-                    showname.Text = "Name: " + part[0];
-                    showusername.Text = "Username: " + part[1];
-                    showemail.Text = "Email: " + part[2];
-                    showpw.Text = "Password: " + part[3];
-                    numop.Text = "Number of operations: " + part[5];
-
-                    if (File.Exists(operationsPath))
-                    {
-                        foreach (string lineFile in File.ReadAllLines(operationsPath))
-                        {
-                            string[] parts = lineFile.Split(';');
-                            if (parts[0] == actualuser)
-                            {
-                                showinput.Text = "Input: " + parts[1];
-                                showconversion.Text = "Conversion Type: " + parts[2];
-                                showoutput.Text = "Output: " + parts[3];
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
     }
 
     //when the user click 'log out' the user is eliminated and get taken to the main page again
@@ -120,7 +90,8 @@ public partial class UserInfo : ContentPage, IQueryAttributable
     //when the conversor is clicked, it takes the user back to the calculator
     private async void clicked_con(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(Conversor));
+        //await Shell.Current.GoToAsync(nameof(Conversor));
+        await Shell.Current.GoToAsync($"{nameof(Conversor)}?username={this.actualuser}");
     }
 
     //when the exit is clicked, it closes the window
