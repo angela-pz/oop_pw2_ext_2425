@@ -73,24 +73,14 @@
             FontSize="16"
             TextColor="Black"/> 
                 
-            <!--input-->
-            <Label x:Name="showinput" 
-            Text="input"
-            BackgroundColor="white"
-            TextColor="Black"/>
+            <!--input convertion type and output-->
+            <Label x:Name="operationsList"
+            Text=""
+            LineBreakMode="WordWrap"
+            FontSize="14"
+            Margin="10" />
+            <!--wordwrap separates it horizontaly-->
 
-            <!--conversion-->
-            <Label x:Name="showconversion" 
-            Text="conversion"
-            BackgroundColor="white"
-            TextColor="Black"/>
-
-            <!--output-->
-            <Label x:Name="showoutput" 
-            Text="output"
-            BackgroundColor="white"
-            TextColor="Black"/>
-        
             <!-- conversor -->
             <Button 
             Text="Conversor" 

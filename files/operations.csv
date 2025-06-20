@@ -11,3 +11,5 @@ rogers;B;HexadecimalToDecimal;11
 rogers;1001;BinaryToDecimal;9
 loki;25;DecimalToBinary;11001
 angie;222;DecimalToBinary;11011110
+stark;51;DecimalToBinary;110011
+stark;11101;BinaryToDecimal;29

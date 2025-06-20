@@ -23,6 +23,7 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+	//logs the user in when its verified that the username and password exists and is correct
 	private async void login_clicked(object sender, EventArgs e)
 	{
 		string path = "files/user.csv";

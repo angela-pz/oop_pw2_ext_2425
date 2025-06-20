@@ -79,6 +79,7 @@ public partial class Conversor : ContentPage, IQueryAttributable
 
     private async void ListInfo(string inputvalue, string conversionType, string outputcalc)
     {
+        //creates a new line in the file and adds it
         string operationsPath = "files/operations.csv";
         string operationLineFile = $"{actualuser};{inputvalue};{conversionType};{outputcalc}";
 

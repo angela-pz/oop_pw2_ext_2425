@@ -28,8 +28,6 @@ namespace pw2
         }
 
         //save the user into the file
-
-        
         public void StoreUser(string path)
         {
             using (StreamWriter writer = new StreamWriter(path, append: true))
@@ -37,15 +35,5 @@ namespace pw2
                 writer.WriteLine($"{this.name};{this.username};{this.email};{this.password};{this.confirmPassword};{this.operations}");
             }
         }
-
-/*
-        public void StoreList(string operationsPath)
-        {
-            using (StreamWriter writer = new StreamWriter(operationsPath, append: true))
-            {
-                writer.WriteLine($"{this.username};{this.inputvalue};{this.conversiontype};{this.outputcalc}");
-            }
-        }
-*/ 
     }
 }

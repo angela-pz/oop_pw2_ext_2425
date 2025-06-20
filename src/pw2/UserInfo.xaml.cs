@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls;
 
 namespace pw2;
@@ -51,6 +52,8 @@ public partial class UserInfo : ContentPage, IQueryAttributable
 
                         try
                         {
+                            string answer = "";
+
                             if (File.Exists(operationsPath))
                             {
                                 foreach (string lineFile in File.ReadAllLines(operationsPath))
@@ -58,12 +61,13 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                                     string[] parts = lineFile.Split(';');
                                     if (parts[0] == actualuser)
                                     {
-                                        showinput.Text = "Input: " + parts[1];
-                                        showconversion.Text = "Conversion Type: " + parts[2];
-                                        showoutput.Text = "Output: " + parts[3];
+                                        answer += $"Input: {parts[1]}\nType: {parts[2]}\nOutput: {parts[3]}\n\n";
                                     }
                                 }
                             }
+
+                            //shows the answer block with the input convertion type and output
+                            operationsList.Text = answer;
                         }
                         catch (Exception ex)
                         {
