@@ -58,6 +58,7 @@ public partial class UserInfo : ContentPage, IQueryAttributable
                             {
                                 foreach (string lineFile in File.ReadAllLines(operationsPath))
                                 {
+                                    //only shows the operations that are from the actual user
                                     string[] parts = lineFile.Split(';');
                                     if (parts[0] == actualuser)
                                     {
