@@ -18,8 +18,11 @@ style="width:4.30208in;height:1.07292in" />
 
 INDEX
 
-1 I - INTRODUCTION 3 II - DESCRIPTION 3 III - UML DIAGRAM 4 IV -
-PROBLEMS 7 V - CONCLUSION 8
+I - INTRODUCTION 3
+II - DESCRIPTION 3
+III - UML DIAGRAM 4
+IV - PROBLEMS 7
+V - CONCLUSION 8
 
 **I** **-** **INTRODUCTION**
 
@@ -47,7 +50,9 @@ the following sections:
 > the login interface
 >
 > \- ForgotPassword → displays an interface where the user can change
-> their password - Conversor → displays the
+> their password
+> 
+> - Conversor → displays the
 > decimal/binary/hexadecimal/octal convertor interface
 >
 > \- UserInfo → displays an interface where the user can see the actual
